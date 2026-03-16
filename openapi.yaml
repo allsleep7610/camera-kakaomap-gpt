@@ -6,7 +6,7 @@ info:
     Lookup unmanned traffic enforcement cameras by the official management number.
     If the input is exactly four digits, return every camera that shares the same last four digits.
 servers:
-  - url: https://slimy-mangos-switch.loca.lt
+  - url: https://camera-kakaomap-gpt-direct.vercel.app
 paths:
   /camera-link:
     get:
