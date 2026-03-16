@@ -1,0 +1,129 @@
+openapi: 3.1.0
+info:
+  title: Camera KakaoMap GPT Action API
+  version: 1.0.0
+  description: >
+    Lookup unmanned traffic enforcement cameras by the official management number.
+    If the input is exactly four digits, return every camera that shares the same last four digits.
+servers:
+  - url: https://slimy-mangos-switch.loca.lt
+paths:
+  /camera-link:
+    get:
+      operationId: getCameraLink
+      summary: Get camera link information
+      description: >
+        Use the full official camera management number for an exact match, or use four digits
+        to retrieve all cameras whose management number ends with those digits.
+      parameters:
+        - in: query
+          name: cameraCode
+          required: true
+          schema:
+            type: string
+          description: Full management number or a four-digit suffix.
+      responses:
+        "200":
+          description: Lookup result
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - query
+                  - normalizedQuery
+                  - queryType
+                  - matched
+                  - count
+                  - source
+                  - results
+                properties:
+                  query:
+                    type: string
+                  normalizedQuery:
+                    type: string
+                  queryType:
+                    type: string
+                    enum: [exact, suffix]
+                  matched:
+                    type: boolean
+                  count:
+                    type: integer
+                  source:
+                    type: string
+                  message:
+                    type: string
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                        - cameraCode
+                        - cameraName
+                        - latitude
+                        - longitude
+                        - kakaoMapUrl
+                      properties:
+                        cameraCode:
+                          type: string
+                        cameraName:
+                          type: string
+                        roadAddress:
+                          type: string
+                        lotNumberAddress:
+                          type: string
+                        latitude:
+                          type: number
+                        longitude:
+                          type: number
+                        installationLocation:
+                          type: string
+                        enforcementType:
+                          type: string
+                        speedLimit:
+                          type: number
+                        provinceName:
+                          type: string
+                        cityName:
+                          type: string
+                        sourceUpdatedAt:
+                          type: string
+                        suffixDigits:
+                          type: string
+                        kakaoMapUrl:
+                          type: string
+                          format: uri
+              examples:
+                exactMatch:
+                  summary: Exact management number
+                  value:
+                    query: A1234
+                    normalizedQuery: A1234
+                    queryType: exact
+                    matched: true
+                    count: 1
+                    source: NationalTrafficEnforcementCameraStandardData
+                    results:
+                      - cameraCode: A1234
+                        cameraName: School Zone Camera 1
+                        roadAddress: 1 Sejong-daero, Seoul
+                        latitude: 37.5665
+                        longitude: 126.978
+                        kakaoMapUrl: https://map.kakao.com/link/map/School%20Zone%20Camera%201,37.5665,126.978
+                suffixMatch:
+                  summary: Four-digit suffix
+                  value:
+                    query: "1234"
+                    normalizedQuery: "1234"
+                    queryType: suffix
+                    matched: true
+                    count: 3
+                    source: NationalTrafficEnforcementCameraStandardData
+                    results:
+                      - cameraCode: A1234
+                        cameraName: School Zone Camera 1
+                        latitude: 37.5665
+                        longitude: 126.978
+                        kakaoMapUrl: https://map.kakao.com/link/map/School%20Zone%20Camera%201,37.5665,126.978
+        "400":
+          description: Invalid request

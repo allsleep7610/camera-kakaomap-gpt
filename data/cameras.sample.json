@@ -1,0 +1,58 @@
+[
+  {
+    "cameraCode": "A1234",
+    "cameraName": "School Zone Camera 1",
+    "roadAddress": "1 Sejong-daero, Seoul",
+    "lotNumberAddress": "Taepyeongno 1-ga, Seoul",
+    "latitude": 37.5665,
+    "longitude": 126.978,
+    "installationLocation": "Seoul City Hall Intersection",
+    "enforcementType": "speed",
+    "speedLimit": 50,
+    "provinceName": "Seoul",
+    "cityName": "Jung-gu",
+    "sourceUpdatedAt": "2026-01-01"
+  },
+  {
+    "cameraCode": "B1234",
+    "cameraName": "Bus Lane Camera 2",
+    "roadAddress": "110 Teheran-ro, Seoul",
+    "lotNumberAddress": "Yeoksam-dong, Seoul",
+    "latitude": 37.4981,
+    "longitude": 127.0276,
+    "installationLocation": "Gangnam Station Exit 1",
+    "enforcementType": "bus-lane",
+    "speedLimit": 60,
+    "provinceName": "Seoul",
+    "cityName": "Gangnam-gu",
+    "sourceUpdatedAt": "2026-01-01"
+  },
+  {
+    "cameraCode": "C5678",
+    "cameraName": "Signal Camera 3",
+    "roadAddress": "200 Dunsan-ro, Daejeon",
+    "lotNumberAddress": "Dunsan-dong, Daejeon",
+    "latitude": 36.3504,
+    "longitude": 127.3845,
+    "installationLocation": "Daejeon City Hall",
+    "enforcementType": "signal",
+    "speedLimit": 50,
+    "provinceName": "Daejeon",
+    "cityName": "Seo-gu",
+    "sourceUpdatedAt": "2026-01-01"
+  },
+  {
+    "cameraCode": "D1234",
+    "cameraName": "School Zone Camera 4",
+    "roadAddress": "80 Haeundaehaebyeon-ro, Busan",
+    "lotNumberAddress": "Jung-dong, Busan",
+    "latitude": 35.1587,
+    "longitude": 129.1604,
+    "installationLocation": "Haeundae Elementary School",
+    "enforcementType": "speed",
+    "speedLimit": 30,
+    "provinceName": "Busan",
+    "cityName": "Haeundae-gu",
+    "sourceUpdatedAt": "2026-01-01"
+  }
+]
