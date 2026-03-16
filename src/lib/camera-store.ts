@@ -1,5 +1,6 @@
-import { readFile } from "node:fs/promises";
+import { access, readFile } from "node:fs/promises";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 import { classifyCameraQuery, extractLastFourDigits, normalizeCameraCode } from "./camera-code.js";
 import { buildKakaoMapUrl } from "./kakao-link.js";
@@ -205,9 +206,30 @@ export class CameraRepository {
 }
 
 export async function loadCameraRepository(dataFilePath: string): Promise<CameraRepository> {
-  const resolvedPath = path.isAbsolute(dataFilePath)
-    ? dataFilePath
-    : path.resolve(process.cwd(), dataFilePath);
+  const moduleDir = path.dirname(fileURLToPath(import.meta.url));
+  const candidates = path.isAbsolute(dataFilePath)
+    ? [dataFilePath]
+    : [
+        path.resolve(process.cwd(), dataFilePath),
+        path.resolve(moduleDir, "..", "..", dataFilePath),
+        path.resolve(moduleDir, "..", "..", "..", dataFilePath),
+      ];
+
+  let resolvedPath: string | null = null;
+  for (const candidate of candidates) {
+    try {
+      await access(candidate);
+      resolvedPath = candidate;
+      break;
+    } catch {
+      // Try the next candidate. Vercel can relocate bundled files.
+    }
+  }
+
+  if (!resolvedPath) {
+    throw new Error(`Camera data file not found: ${dataFilePath}`);
+  }
+
   const raw = await readFile(resolvedPath, "utf8");
   const parsed = JSON.parse(raw) as unknown;
 
