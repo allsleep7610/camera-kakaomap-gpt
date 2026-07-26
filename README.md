@@ -2,7 +2,7 @@
 
 Custom GPT action backend for this flow:
 
-- full management number like `A1234` -> exact camera + Kakao Map link
+- full management number like `G1234` -> exact camera + Kakao Map link
 - four digits like `1234` -> every camera whose management number ends with `1234`
 
 ## What is included
@@ -27,7 +27,7 @@ Open:
 
 ```text
 http://localhost:3000/health
-http://localhost:3000/camera-link?cameraCode=A1234
+http://localhost:3000/camera-link?cameraCode=G1234
 http://localhost:3000/camera-link?cameraCode=1234
 ```
 
@@ -63,6 +63,8 @@ npm run start
 - The query logic treats exactly four digits as suffix mode.
 - Any other input is treated as a full management number lookup.
 - Kakao Map links are returned as `https://map.kakao.com/link/map/...`.
+- Production examples should use real dataset codes such as `G1234`; placeholder sample codes like `A1234` only exist in the local sample file.
+- The root endpoint documents query formats instead of fixed example codes so it does not drift from live data.
 
 ## Simplest Vercel deploy
 

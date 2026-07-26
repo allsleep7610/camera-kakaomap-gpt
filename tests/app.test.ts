@@ -4,6 +4,7 @@ import { createApp } from "../src/app.js";
 
 describe("app routes", () => {
   const app = createApp("data/cameras.sample.json");
+  const missingDataApp = createApp("data/does-not-exist.json");
 
   test("serves exact camera lookups", async () => {
     const response = await app.request("/camera-link?cameraCode=A1234");
@@ -29,5 +30,22 @@ describe("app routes", () => {
 
     expect(response.status).toBe(400);
     expect(payload.matched).toBe(false);
+  });
+
+  test("keeps health alive even if camera data is missing", async () => {
+    const response = await missingDataApp.request("/health");
+    const payload = await response.json();
+
+    expect(response.status).toBe(200);
+    expect(payload.ok).toBe(true);
+  });
+
+  test("returns 503 when camera data cannot be loaded", async () => {
+    const response = await missingDataApp.request("/camera-link?cameraCode=1234");
+    const payload = await response.json();
+
+    expect(response.status).toBe(503);
+    expect(payload.matched).toBe(false);
+    expect(payload.message).toBe("Camera dataset is temporarily unavailable.");
   });
 });

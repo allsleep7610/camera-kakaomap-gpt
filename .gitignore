@@ -4,3 +4,5 @@ dist/
 server.log
 tunnel.log
 tunnel2.log
+
+.vercel

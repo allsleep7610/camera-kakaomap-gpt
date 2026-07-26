@@ -97,19 +97,19 @@ paths:
                 exactMatch:
                   summary: Exact management number
                   value:
-                    query: A1234
-                    normalizedQuery: A1234
+                    query: G1234
+                    normalizedQuery: G1234
                     queryType: exact
                     matched: true
                     count: 1
                     source: NationalTrafficEnforcementCameraStandardData
                     results:
-                      - cameraCode: A1234
-                        cameraName: School Zone Camera 1
-                        roadAddress: 1 Sejong-daero, Seoul
-                        latitude: 37.5665
-                        longitude: 126.978
-                        kakaoMapUrl: https://map.kakao.com/link/map/School%20Zone%20Camera%201,37.5665,126.978
+                      - cameraCode: G1234
+                        cameraName: 남진빌라 앞 삼거리 (남원대교→광한루)
+                        lotNumberAddress: 전북특별자치도 남원시 죽항동 58-1
+                        latitude: 35.4074661
+                        longitude: 127.3878055
+                        kakaoMapUrl: https://map.kakao.com/link/map/G1234,35.4074661,127.3878055
                 suffixMatch:
                   summary: Four-digit suffix
                   value:
@@ -117,13 +117,13 @@ paths:
                     normalizedQuery: "1234"
                     queryType: suffix
                     matched: true
-                    count: 3
+                    count: 4
                     source: NationalTrafficEnforcementCameraStandardData
                     results:
-                      - cameraCode: A1234
-                        cameraName: School Zone Camera 1
-                        latitude: 37.5665
-                        longitude: 126.978
-                        kakaoMapUrl: https://map.kakao.com/link/map/School%20Zone%20Camera%201,37.5665,126.978
+                      - cameraCode: "1234"
+                        cameraName: 현산물류센터 앞
+                        latitude: 37.492402
+                        longitude: 126.492312
+                        kakaoMapUrl: https://map.kakao.com/link/map/1234,37.492402,126.492312
         "400":
           description: Invalid request

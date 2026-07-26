@@ -1,6 +1,6 @@
 {
   "functions": {
-    "src/index.ts": {
+    "src/app.ts": {
       "includeFiles": "data/cameras.json"
     }
   }

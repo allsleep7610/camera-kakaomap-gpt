@@ -126,7 +126,6 @@ function toCameraRecord(input: Record<string, unknown>): CameraRecord | null {
 }
 
 function toMatch(record: IndexedCameraRecord): CameraMatch {
-  const name = record.cameraName || record.installationLocation || record.cameraCode;
   return {
     cameraCode: record.cameraCode,
     cameraName: record.cameraName,
@@ -141,7 +140,9 @@ function toMatch(record: IndexedCameraRecord): CameraMatch {
     cityName: record.cityName,
     sourceUpdatedAt: record.sourceUpdatedAt,
     suffixDigits: record.suffixDigits,
-    kakaoMapUrl: buildKakaoMapUrl(name, record.latitude, record.longitude),
+    // Kakao map deep links break for some long labels containing commas or
+    // punctuation, so use the management code as the marker label.
+    kakaoMapUrl: buildKakaoMapUrl(record.cameraCode, record.latitude, record.longitude),
   };
 }
 
